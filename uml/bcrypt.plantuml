@@ -1,0 +1,20 @@
+@startuml Hello
+entity Client 
+boundary Server.js
+control shoppingCartController
+database shoppingList
+
+
+
+Client -> Server.js : 1.)POST /signup {username: aa, password: bb}
+Server.js -> shoppingCartController  : 2.)createUser
+shoppingCartController -> shoppingCartController : 3.)bcrypt.hash(password, SALT_WORK_FACTOR)
+shoppingCartController -> shoppingList : 4.)User.create({username: username, password: hash})
+Client <- shoppingCartController : 5.)redirect to home page
+
+Client -> Server.js : 1.)POST /login {username: aa, password: bb} 
+Server.js -> shoppingCartController : 2.)verifyUser
+shoppingCartController -> shoppingList: 3.)User.findOne({username: username})
+shoppingCartController -> shoppingCartController: 4.)bcrypt.compare(password, db.password)
+Client <- shoppingCartController: 5.) if true direct to homepage, else redirect to signup 
+@enduml

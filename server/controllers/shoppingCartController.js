@@ -4,20 +4,20 @@ const bcrypt = require('bcrypt');
 const { User } = require("../models/shoppingCart");
 const shoppingCartController = {};
 
-shoppingCartController.hashPassword = (req, res, next) => {
-  bcrypt.genSalt(SALT_WORK_FACTOR)
-    .then((salt) => {
-      bcrypt.hash(req.body.password, salt)
-        .then((hashedPassword) => {
-          res.locals.user = { username: req.body.username, password: hashedPassword };
-          return next();
-        });
-    })
-    .catch((err) => {
-      console.log('hashing error: ', err);
-      return next();
-    });
-}
+// shoppingCartController.hashPassword = (req, res, next) => {
+//   bcrypt.genSalt(SALT_WORK_FACTOR)
+//     .then((salt) => {
+//       bcrypt.hash(req.body.password, salt)
+//         .then((hashedPassword) => {
+//           res.locals.user = { username: req.body.username, password: hashedPassword };
+//           return next();
+//         });
+//     })
+//     .catch((err) => {
+//       console.log('hashing error: ', err);
+//       return next();
+//     });
+// }
 
 shoppingCartController.createUser = (req, res, next) => {
     const { username, password } = req.body
